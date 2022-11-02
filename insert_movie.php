@@ -179,7 +179,9 @@ input:focus, textarea:focus {
 </head>
 
 <body>
-
+<?php
+	include 'navbar.html';
+?>
 	
 
 	<?php

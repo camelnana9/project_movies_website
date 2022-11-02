@@ -10,12 +10,17 @@
 </head>
 
 <body>
+<?php
+
+include 'navbar.html';
+?>
     <h1>Login</h1>
 
     <?php
-     $email =  $_POST['email'];
+    
 
     if (isset($_POST['loginBtn'])) {
+        $email =  $_POST['email'];
         $conn = mysqli_connect('localhost', 'root', '', 'movies_project');
         $query = "SELECT *
         FROM users

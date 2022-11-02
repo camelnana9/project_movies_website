@@ -1,23 +1,22 @@
 <?php
 
 $conn = mysqli_connect('localhost', 'root', '', 'movies_project');
-$query = "SELECT id, title, poster, description
+$query = "SELECT id, title, poster, descreption
 FROM movies
 
 ORDER BY title ASC";
 
 if (isset($_POST['signinbtn'])) {
   if($_POST['title']){
-    $query = "SELECT *
-FROM movies
-where title like '%" . $_POST['title'] . "%'";
-
+    $query = "SELECT * FROM movies where title like '%" . $_POST['title'] . "%'";
+   
   }
+  $result = mysqli_query($conn, $query);
+  $movies = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  mysqli_close($conn);
 }
 
-$result = mysqli_query($conn, $query);
-$movies = mysqli_fetch_all($result, MYSQLI_ASSOC);
-mysqli_close($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +30,10 @@ mysqli_close($conn);
 </head>
 
 <body>
+<?php
+
+include 'navbar.html';
+?>
     <form method="post">
     <input type="text" name="title" placeholder="entrez le titre d'un film"><br>
     <input type="submit" name="signinbtn" value="Signin">
@@ -38,7 +41,12 @@ mysqli_close($conn);
 
     <h1>movies List</h1>
 
-    <?php foreach ($movies as $movie) : ?>
+    <?php 
+      $result = mysqli_query($conn, $query);
+    $movies = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+    foreach ($movies as $movie) : ?>
 
         <p>
             <strong>Title : </strong>
@@ -47,7 +55,7 @@ mysqli_close($conn);
 
         <p>
             <strong>description : </strong>
-            <?= $movie['description']; ?>
+            <?= $movie['descreption']; ?>
         </p>
 
         <p>

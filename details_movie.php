@@ -1,8 +1,7 @@
 <?php
 
 $conn = mysqli_connect('localhost', 'root', '', 'movies_project');
-$query = "SELECT *
-FROM movies
+$query = " SELECT * FROM movies
 WHERE id= ".$_GET['id'];
 $result = mysqli_query($conn, $query);
 $movies = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -21,7 +20,11 @@ mysqli_close($conn);
 </head>
 
 <body>
-    
+
+<?php
+
+include 'navbar.html';
+?>
 
     <h1>detail movie</h1>
 
@@ -34,7 +37,7 @@ mysqli_close($conn);
 
         <p>
             <strong>description : </strong>
-            <?= $movie['description']; ?>
+            <?= $movie['descreption']; ?>
         </p>
 
         <p>

@@ -185,6 +185,9 @@ input:focus, textarea:focus {
 
 
     <?php
+	
+	
+
 
     if (isset($_POST['registerBtn'])) {
         $firstName = strip_tags(trim($_POST['first_name']));
@@ -241,7 +244,9 @@ input:focus, textarea:focus {
         echo "<h1 style='color: red'>Problem registering</h1>";
     }
     ?>
-
+<?php
+	include 'navbar.html';
+?>
 
     <div id="form-main">
   <div id="form-div">
