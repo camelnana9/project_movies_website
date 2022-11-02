@@ -1,23 +1,13 @@
 <?php
 
 $conn = mysqli_connect('localhost', 'root', '', 'movies_project');
-$query = "SELECT id, title, poster, description
+$query = "SELECT *
 FROM movies
-
-ORDER BY title ASC";
-
-if (isset($_POST['signinbtn'])) {
-  if($_POST['title']){
-    $query = "SELECT *
-FROM movies
-where title like '%" . $_POST['title'] . "%'";
-
-  }
-}
-
+WHERE id= ".$_GET['id'];
 $result = mysqli_query($conn, $query);
 $movies = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_close($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -27,21 +17,18 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>movies_page</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <form method="post">
-    <input type="text" name="title" placeholder="entrez le titre d'un film"><br>
-    <input type="submit" name="signinbtn" value="Signin">
-    </form>
+    
 
-    <h1>movies List</h1>
+    <h1>detail movie</h1>
 
     <?php foreach ($movies as $movie) : ?>
 
         <p>
-            <strong>Title : </strong>
+            <strong>title : </strong>
             <?= $movie['title']; ?>
         </p>
 
@@ -51,16 +38,23 @@ mysqli_close($conn);
         </p>
 
         <p>
+            <strong>release_date : </strong>
+            <?= $movie['release_date']; ?>
+        </p>
+
+        <p>
+            <strong>director_id : </strong>
+            <?= $movie['director_id']; ?>
+        </p>
+
+        <p>
             <strong>Poster : </strong>
             <img src="<?= $movie['poster']; ?>" width="200px">
         </p>
-        <a href="./details_movie.php?id=<?= $movie['id']; ?>">Detail movie</a>
 
+      
         <hr>
 
     <?php endforeach; ?>
 
 </body>
-
-</html>
-    
